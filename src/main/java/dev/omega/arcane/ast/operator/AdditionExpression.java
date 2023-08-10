@@ -13,7 +13,7 @@ public record AdditionExpression(MolangExpression left, MolangExpression right) 
 
     @Override
     public MolangExpression simplify() {
-        @Nullable MolangExpression simplified = simplifyConstantExpression(left, right);
+        @Nullable MolangExpression simplified = simplifyConstantExpression(left.simplify(), right.simplify());
         return simplified == null ? new AdditionExpression(left.simplify(), right.simplify()) : simplified;
     }
 

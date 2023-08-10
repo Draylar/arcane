@@ -6,7 +6,6 @@ import dev.omega.arcane.reference.ReferenceType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Function;
 
 public record ReferenceExpression(ReferenceType type, String value) implements MolangExpression {
 
@@ -23,19 +22,19 @@ public record ReferenceExpression(ReferenceType type, String value) implements M
         // If the context provides a way to bind this ReferenceExpression to an Object value, try to simplify it down now~
         @Nullable List<ExpressionBindingContext.Binder<?>> evaluators = context.getEvaluators(type);
         if(evaluators != null) {
-            for (ExpressionBindingContext.Binder<?> binder : evaluators) {
-                if(binder.expression().equals(value)) {
-                    Class<?> expectedClass = binder.value();
+            for (ExpressionBindingContext.Binder binder : evaluators) {
+                if(binder.getReferenceName().equals(value)) {
+                    @Nullable Class<?> expectedClass = binder.getExpectedClass();
 
                     // Try to find the expected class the mapper wants from our Object[]
-                    for (Object value : values) {
-                        if(value.getClass() == expectedClass) {
-
-                            // Object -> Expression Reference
-                            Function mapper = binder.mapper();
-                            expression = (ObjectAwareExpression) mapper.apply(value);
-                            return expression;
+                    if(expectedClass != null) {
+                        for (Object value : values) {
+                            if(value.getClass() == expectedClass) {
+                                return binder.bind(value);
+                            }
                         }
+                    } else {
+                        return binder.bind(null);
                     }
                 }
             }
