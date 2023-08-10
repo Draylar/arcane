@@ -23,7 +23,7 @@ public class MathExpression {
 
         @Override
         public float evaluate() {
-            return (float) Math.acos(input.evaluate());
+            return (float) Math.acos(Math.toRadians(input.evaluate()));
         }
 
         @Override
@@ -36,7 +36,7 @@ public class MathExpression {
 
         @Override
         public float evaluate() {
-            return (float) Math.asin(input.evaluate());
+            return (float) Math.asin(Math.toRadians(input.evaluate()));
         }
 
         @Override
@@ -49,7 +49,7 @@ public class MathExpression {
 
         @Override
         public float evaluate() {
-            return (float) Math.atan(input.evaluate());
+            return (float) Math.atan(Math.toRadians(input.evaluate()));
         }
 
         @Override
@@ -62,7 +62,7 @@ public class MathExpression {
 
         @Override
         public float evaluate() {
-            return (float) Math.atan2(y.evaluate(), x.evaluate());
+            return (float) Math.atan2(Math.toRadians(y.evaluate()), Math.toRadians(x.evaluate()));
         }
 
         @Override
@@ -102,7 +102,7 @@ public class MathExpression {
 
         @Override
         public float evaluate() {
-            return (float) Math.cos(input.evaluate());
+            return (float) Math.cos(Math.toRadians(input.evaluate()));
         }
 
         @Override
@@ -314,7 +314,7 @@ public class MathExpression {
 
         @Override
         public float evaluate() {
-            return (float) Math.sin(input.evaluate());
+            return (float) Math.sin(Math.toRadians(input.evaluate()));
         }
 
         @Override
