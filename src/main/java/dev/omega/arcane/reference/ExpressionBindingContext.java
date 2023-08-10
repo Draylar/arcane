@@ -60,17 +60,16 @@ public class ExpressionBindingContext {
      * @param value the identifier after the reference type ({@code variable.identifier}) to bind with this resolver
      * @param mapper a mapper to return values for the reference expression
      * @return this {@code ExpressionBindingContext} for building
-     * @param <T> object type for reference resolving
      */
     @ApiStatus.AvailableSince("1.1.0")
-    public <T> ExpressionBindingContext registerReferenceResolver(ReferenceType type, String value, Supplier<ObjectAwareExpression<Void>> mapper) {
+    public ExpressionBindingContext registerReferenceResolver(ReferenceType type, String value, Supplier<ObjectAwareExpression<Void>> mapper) {
         getTypeEvaluator(type).add(new SupplierBinder<>(value, mapper));
         return this;
     }
 
     @ApiStatus.Experimental
-    public <T> ExpressionBindingContext registerDirectReferenceResolver(ReferenceType type, String value, Class<T> objectClass, Supplier<Float> mapper) {
-        getTypeEvaluator(type).add(new FunctionBinder<>(objectClass, value, bindingValue -> new DynamicObjectAwareExpression<>(bindingValue, any -> mapper.get())));
+    public ExpressionBindingContext registerDirectReferenceResolver(ReferenceType type, String value, Supplier<Float> mapper) {
+        getTypeEvaluator(type).add(new SupplierBinder<>(value, () -> new DynamicObjectAwareExpression<>(null, (any) -> mapper.get())));
         return this;
     }
 
