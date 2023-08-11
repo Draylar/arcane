@@ -29,7 +29,7 @@ public record ReferenceExpression(ReferenceType type, String value) implements M
                     // Try to find the expected class the mapper wants from our Object[]
                     if(expectedClass != null) {
                         for (Object value : values) {
-                            if(value.getClass() == expectedClass) {
+                            if(expectedClass.isAssignableFrom(value.getClass())) {
                                 return binder.bind(value);
                             }
                         }
