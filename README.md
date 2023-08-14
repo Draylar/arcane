@@ -2,7 +2,7 @@
 
 A blazing fast [Molang](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/molangreference/examples/molangconcepts/molangintroduction) library for Java, built by a person who has written more Molang than they would like to admit.
 Arcane will chug through millions of Molang evaluations each tick without impacting performance<sup>1</sup>.
-Faster than every other available library<sup>2</sup>, bundled at less than 25Kb, and licensed with our fellow developers in mind.
+Faster than every other available library<sup>2</sup>, bundled at less than 100Kb, and licensed with our fellow developers in mind.
 
 &nbsp;&nbsp;&nbsp;Not sure what Molang is? [Scroll down]() to find out more.
 
@@ -10,7 +10,7 @@ Faster than every other available library<sup>2</sup>, bundled at less than 25Kb
 
 ### Disclaimer
 
-Arcane is in active development. API *will* break in the future.
+Arcane is in active development. API *will* break in the future. Any version `0.x.x` is unstable.
 
 ---
 
@@ -39,7 +39,7 @@ maven {
 
 *Dependency*
 ```groovy
-modImplementation('dev.omega:arcane:1.0.0')
+modImplementation('dev.omega:arcane:0.1.3')
 ```
 
 ---
@@ -157,3 +157,6 @@ Directly set variable/queries for expensive operations isn't supported yet, but 
 - Query Properties (`query.function_name`)
 
 Geometry, Material, Texture, and Context reference types aren't needed in the context of Minecraft Java edition, so they are currently not supported in Arcane.
+
+Arcane also doesn't support "complex" operations with brackets or temporary variables (yet) - the primary usage case for Arcane
+is parsing animation queries, where these types of Molang expressions are typically absent.

@@ -32,6 +32,13 @@ publishing {
     }
 
     repositories {
-
+        maven {
+            name = "draylarRepository"
+            url = "https://maven.draylar.dev/releases"
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
     }
 }
