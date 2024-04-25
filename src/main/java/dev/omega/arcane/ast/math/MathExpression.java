@@ -287,7 +287,9 @@ public class MathExpression {
 
         @Override
         public float evaluate() {
-            return low.evaluate() + Molang.RANDOM.nextFloat() * high.evaluate();
+            float low = this.low.evaluate();
+            float high = this.high.evaluate();
+            return low + Molang.RANDOM.nextFloat() * (high - low);
         }
 
         @Override
@@ -301,7 +303,8 @@ public class MathExpression {
         @Override
         public float evaluate() {
             // high is inclusive, so we add 'close-to-1' value to give high value ane qual chance at being picked
-            return (int) (low.evaluate() + Molang.RANDOM.nextFloat() * high.evaluate() + 0.999);
+            float low = this.low.evaluate();
+            return (int) (low + Molang.RANDOM.nextFloat() * (high.evaluate() + 0.999 - low));
         }
 
         @Override
